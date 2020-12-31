@@ -1,10 +1,9 @@
-const express = require("express");
-require("./db/mongoose");
-const userRouter = require("./routers/user");
-const taskRouter = require("./routers/task");
-
-const app = express();
+const app = require("./app");
 const port = process.env.PORT;
+
+app.listen(port, (params) => {
+    console.log("listening on " + port);
+});
 
 // app.use((req, res, next) => {
 //     if (req.method == "GET") {
@@ -26,28 +25,17 @@ const port = process.env.PORT;
 //     res.status(404).send("Boom");
 // });
 
-const multer = require("multer");
-const upload = multer({
-    dest: "images",
-    limits: { fileSize: 1000000 },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.docx?$/)) {
-            return cb(new Error(" must be a pdf"));
-        }
-        return cb(undefined, true);
-    },
-});
-
-app.use(express.json());
-app.use(userRouter);
-app.use(taskRouter);
-
-app.listen(port, (params) => {
-    console.log("listening on " + port);
-});
-
-const Task = require("./models/task");
-const User = require("./models/user");
+// const multer = require("multer");
+// const upload = multer({
+//     dest: "images",
+//     limits: { fileSize: 1000000 },
+//     fileFilter(req, file, cb) {
+//         if (!file.originalname.match(/\.docx?$/)) {
+//             return cb(new Error(" must be a pdf"));
+//         }
+//         return cb(undefined, true);
+//     },
+// });
 
 // email sending
 

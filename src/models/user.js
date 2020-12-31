@@ -81,7 +81,7 @@ mySchema.statics.findByCreds = async (email, passwd) => {
         throw new Error("no user " + email);
     }
     const isMatch = await bcryptjs.compare(passwd, user.password);
-    console.log(passwd);
+    //console.log(passwd);
     if (!isMatch) {
         throw new Error("unable to login");
     }

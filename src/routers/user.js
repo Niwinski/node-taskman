@@ -10,7 +10,7 @@ const multer = require("multer");
 router.post("/users", async (req, res) => {
     try {
         const user = new User(req.body);
-        sendWelcomeMail(user.email, user.name);
+        //sendWelcomeMail(user.email, user.name);
         const token = await user.generateAuthToken();
         await user.save();
         res.status(201).send({ user, token });
@@ -24,7 +24,6 @@ router.post("/users/login", async (req, res) => {
     try {
         const user = await User.findByCreds(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
-        //        res.send({ user: user, token });
         res.send({ user, token });
     } catch (e) {
         res.status(400).send(e);
@@ -69,8 +68,6 @@ router.post(
     upload.single("avatar.jpg"),
     async (req, res) => {
         try {
-            //            console.log(req.user._id);
-
             const roundedCorners = Buffer.from(
                 '<svg><rect x="0" y="0" width="200" height="200" rx="50" ry="50"/></svg>'
             );
